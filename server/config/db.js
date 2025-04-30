@@ -1,19 +1,46 @@
-const express = require("express");
-const mysql = require("mysql");
 
-// Create a connection to the database
-const connection = mysql.createConnection({
-  DB_HOST: "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
-  DB_USERNAME: "4HrUbDy5TcxJ8HE.root",
-  DB_PASSWORD: "eN2674uT0a0OlBIK",
-  DB_DATABASE: "lptc-pms",
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
+
+
+dotenv.config({ path: "../.env" });
+
+
+const requiredEnvVars = [
+  "DB_HOST",
+  "DB_PORT",
+  "DB_USERNAME",
+  "DB_PASSWORD",
+  "DB_DATABASE",
+];
+requiredEnvVars.forEach((key) => {
+  if (!process.env[key]) {
+    throw new Error(`Environment variable ${key} is missing or undefined.`);
+  }
 });
 
-// open the MySQL connection
-connection.connect((error) => {
-  if (error) {
-    console.log("A error has been occurred " + "while connecting to database.");
+
+async function connectToDatabase() {
+  try {
+    
+    const connection = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      ssl: {
+        rejectUnauthorized: true, // Enforce secure connection
+      },
+    });
+
+    console.log("Connected to the database.");
+    return connection;
+  } catch (error) {
+    console.error("An error occurred while connecting to the database:", error);
     throw error;
   }
-  console.log("Connected to the database.");
-});
+}
+
+const connection = connectToDatabase();
+export default connection;
