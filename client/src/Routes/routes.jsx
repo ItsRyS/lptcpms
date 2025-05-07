@@ -9,6 +9,12 @@ import LayoutTeacher from "../layouts/layoutTeacher";
 import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/auth/loginPage";
 import HomeStudent from "../pages/student/home";
+import ProfilePage from "../pages/student/profilePage";
+import OldProject from "../pages/student/oldProject";
+import RequestProject from "../pages/student/requestProject";
+import SentDoc from "../pages/student/sentDoc";
+import TeacherInfo from "../pages/student/teacherInfo";
+import DocumentPage from "../pages/student/documentPage";
 import HomeTeacher from "../pages/teacher/home";
 
 const AppRoutes = () => {
@@ -21,6 +27,12 @@ const AppRoutes = () => {
         {/* Student Routes */}
         <Route path="/student" element={<LayoutStudent />}>
           <Route index element={<HomeStudent />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="oldproject" element={<OldProject />} />
+          <Route path="request" element={<RequestProject />} />
+          <Route path="sentdoc" element={<SentDoc />} />
+          <Route path="teacherinfo" element={<TeacherInfo />} />
+          <Route path="document" element={<DocumentPage />} />
           <Route path="*" element={<div>Page Not Found</div>} />
         </Route>
 
