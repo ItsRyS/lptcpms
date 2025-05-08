@@ -2,12 +2,18 @@
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
-dotenv.config();
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+
 
 const requiredEnvVars = ["DB_HOST", "DB_USER", "DB_PASS", "DB_NAME", "DB_PORT"];
 requiredEnvVars.forEach((key) => {
   if (!process.env[key]) {
-    throw new Error(`❌ Environment variable ${key} is missing or undefined.`);
+    throw new Error(`Environment variable ${key} is missing or undefined.`);
   }
 });
 
