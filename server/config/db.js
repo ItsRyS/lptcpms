@@ -1,46 +1,36 @@
-
+// server/config/db.js
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
+dotenv.config();
 
-dotenv.config({ path: "../.env" });
-
-
-const requiredEnvVars = [
-  "DB_HOST",
-  "DB_PORT",
-  "DB_USERNAME",
-  "DB_PASSWORD",
-  "DB_DATABASE",
-];
+const requiredEnvVars = ["DB_HOST", "DB_USER", "DB_PASS", "DB_NAME", "DB_PORT"];
 requiredEnvVars.forEach((key) => {
   if (!process.env[key]) {
-    throw new Error(`Environment variable ${key} is missing or undefined.`);
+    throw new Error(`❌ Environment variable ${key} is missing or undefined.`);
   }
 });
 
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: Number(process.env.DB_PORT),
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
-async function connectToDatabase() {
-  try {
-    
-    const connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      ssl: {
-        rejectUnauthorized: true, // Enforce secure connection
-      },
-    });
+pool
+  .getConnection()
+  .then((conn) => {
+    console.log("Connected to MySQL database successfully.");
+    conn.release();
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MySQL database:", err);
+    process.exit(1);
+  });
 
-    console.log("Connected to the database.");
-    return connection;
-  } catch (error) {
-    console.error("An error occurred while connecting to the database:", error);
-    throw error;
-  }
-}
-
-const connection = connectToDatabase();
-export default connection;
+export default pool;

@@ -1,11 +1,11 @@
 import express from "express";
-import mysql from "mysql2/promise";
+
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: "../.env" });
 import cors from "cors";
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3000;
 
 app.use(
   cors({

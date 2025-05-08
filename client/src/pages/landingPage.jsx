@@ -22,6 +22,9 @@ const LandingPage = () => {
             <a href="#contact" className="hover:underline">
               Contact
             </a>
+            <Link to="/projects" className="hover:underline">
+              Projects
+            </Link>
             <Link to="/login" className="hover:underline">
               Login
             </Link>

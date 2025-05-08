@@ -8,6 +8,8 @@ import LayoutTeacher from "../layouts/layoutTeacher";
 // Pages
 import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/auth/loginPage";
+
+// Student Pages
 import HomeStudent from "../pages/student/home";
 import ProfilePage from "../pages/student/profilePage";
 import OldProject from "../pages/student/oldProject";
@@ -15,7 +17,17 @@ import RequestProject from "../pages/student/requestProject";
 import SentDoc from "../pages/student/sentDoc";
 import TeacherInfo from "../pages/student/teacherInfo";
 import DocumentPage from "../pages/student/documentPage";
+
+// Teacher Pages
 import HomeTeacher from "../pages/teacher/home";
+import ApproveProjectRequests from "../pages/teacher/ApproveProjectRequests";
+import ReviewProjectDocuments from "../pages/teacher/ReviewProjectDocuments";
+import ApproveCompletedProjects from "../pages/teacher/ApproveCompletedProjects";
+import AddInstructorInfo from "../pages/teacher/AddInstructorInfo";
+import UploadSampleDocuments from "../pages/teacher/UploadSampleDocuments";
+import ManageUsers from "../pages/teacher/ManageUsers";
+import UploadPastProjects from "../pages/teacher/UploadPastProjects";
+import AddProjectCategory from "../pages/teacher/AddProjectCategory";
 
 const AppRoutes = () => {
   return (
@@ -39,10 +51,22 @@ const AppRoutes = () => {
         {/* Teacher Routes */}
         <Route path="/teacher" element={<LayoutTeacher />}>
           <Route index element={<HomeTeacher />} />
+          <Route path="approve-requests" element={<ApproveProjectRequests />} />
+          <Route path="review-documents" element={<ReviewProjectDocuments />} />
+          <Route
+            path="approve-completed"
+            element={<ApproveCompletedProjects />}
+          />
+          <Route path="addinstructorinfo" element={<AddInstructorInfo />} />
+          <Route
+            path="upload-sample-docs"
+            element={<UploadSampleDocuments />}
+          />
+          <Route path="manage-users" element={<ManageUsers />} />
+          <Route path="upload-past-projects" element={<UploadPastProjects />} />
           <Route path="*" element={<div>Page Not Found</div>} />
         </Route>
-
-        {/* Global fallback */}
+        <Route path="add-project-category" element={<AddProjectCategory />} />
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
     </Router>

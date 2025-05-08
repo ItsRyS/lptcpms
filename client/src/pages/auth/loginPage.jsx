@@ -84,8 +84,6 @@ const LoginPage = () => {
               </div>
             </li>
           </ul>
-
-          
         </div>
 
         {/* Right side */}
@@ -112,23 +110,23 @@ const LoginPage = () => {
 
             {/* Form */}
             <form className="space-y-4">
+              {/* Username Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {userType === "student"
-                    ? "Student ID"
-                    : "National ID Card Number"}
+                  {userType === "student" ? "Student ID" : "Email"}
                 </label>
                 <input
-                  type="text"
+                  type={userType === "teacher" ? "email" : "text"}
                   placeholder={
                     userType === "student"
                       ? "Enter your Student ID"
-                      : "Enter your National ID"
+                      : "Enter your Email"
                   }
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
                 />
               </div>
 
+              {/* Password Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Password
@@ -140,6 +138,7 @@ const LoginPage = () => {
                 />
               </div>
 
+              {/* Remember Me & Forgot Password */}
               <div className="flex items-center justify-between">
                 <label className="flex items-center text-sm text-gray-700">
                   <input type="checkbox" className="mr-2" />
@@ -150,6 +149,7 @@ const LoginPage = () => {
                 </a>
               </div>
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold transition"
