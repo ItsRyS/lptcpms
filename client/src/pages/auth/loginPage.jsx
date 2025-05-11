@@ -103,7 +103,7 @@ const LoginPage = () => {
                 onChange={(e) => setUserType(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
               >
-                <option value="student">Student</option>
+                <option value="student">Student-Inw</option>
                 <option value="teacher">Teacher</option>
               </select>
             </div>
@@ -159,7 +159,7 @@ const LoginPage = () => {
             </form>
 
             <p className="mt-4 text-center text-sm text-gray-600">
-              อยากกลับไปหน้าแรกหรอ?{" "}
+              อยากกลับไปหน้าแรกหรอ ?{" "}
               <Link to="/" className="text-blue-600 hover:underline">
                 กดดิ
               </Link>

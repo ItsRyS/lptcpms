@@ -6,11 +6,11 @@ const LandingPage = () => {
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-700">
-            Lampang Tech College
+            Lampang Tech College - IT Department
           </h1>
           <nav className="space-x-6 text-blue-600">
             <a href="#about" className="hover:underline">
-              About
+              About Us
             </a>
             <a href="#staff" className="hover:underline">
               Staff
