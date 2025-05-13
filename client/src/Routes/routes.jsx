@@ -28,6 +28,7 @@ import UploadSampleDocuments from "../pages/teacher/UploadSampleDocuments";
 import ManageUsers from "../pages/teacher/ManageUsers";
 import UploadPastProjects from "../pages/teacher/UploadPastProjects";
 import AddProjectCategory from "../pages/teacher/AddProjectCategory";
+import NotFound from "../components/common/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -67,7 +68,7 @@ const AppRoutes = () => {
           <Route path="*" element={<div>Page Not Found</div>} />
         </Route>
         <Route path="add-project-category" element={<AddProjectCategory />} />
-        <Route path="*" element={<div>Page Not Found</div>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </Router>
   );
