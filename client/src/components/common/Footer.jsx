@@ -61,26 +61,22 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="flex flex-col text-left">
             <h3 className="text-xl font-semibold mb-4 text-white">
               Connect With Us
             </h3>
             <p className="text-white/80 mb-2">
               Email: it-department@lampangtech.ac.th
             </p>
-            <p className="text-white/80 mb-4">Phone: +66 5421 0276</p>
-      
-            <div className="flex space-x-4">
-              <a
-                href="https://www.facebook.com/lptit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-orange-500 transition-all-300"
-              >
-                Facebook: เทคโนโลยีสารสนเทศ วิทยาลัยเทคนิคลำปาง
-              </a>
-             
-            </div>
+            <p className="text-white/80 mb-2">Phone: +66 5421 0276</p>
+            <a
+              href="https://www.facebook.com/LPTC.IT"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/80 hover:text-orange-500 transition-all-300"
+            >
+              Facebook: สาขาวิชาเทคโนโลยีสารสนเทศ
+            </a>
           </div>
         </div>
 
