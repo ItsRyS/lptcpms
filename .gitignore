@@ -12,11 +12,12 @@ npm-debug.log*
 
 # Docker
 mysql_data/
+docker-compose.yml
 docker-compose.override.yml
 docker-compose.override.yaml
 docker-compose.override.yml
 docker-compose.override.yaml
-
+init.sql
 # Linux
 *~
 # IDEs
