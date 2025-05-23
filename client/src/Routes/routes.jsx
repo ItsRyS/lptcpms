@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Layouts
@@ -8,7 +7,7 @@ import LayoutTeacher from "../layouts/layoutTeacher";
 // Pages
 import LandingPage from "../pages/landingPage";
 import LoginPage from "../pages/auth/loginPage";
-
+import ForceChangePage from "../pages/auth/forceChangePage";
 // Student Pages
 import HomeStudent from "../pages/student/home";
 import ProfilePage from "../pages/student/profilePage";
@@ -36,6 +35,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/force-change" element={<ForceChangePage />} />
 
         {/* Student Routes */}
         <Route path="/student" element={<LayoutStudent />}>
@@ -46,6 +46,7 @@ const AppRoutes = () => {
           <Route path="sentdoc" element={<SentDoc />} />
           <Route path="teacherinfo" element={<TeacherInfo />} />
           <Route path="document" element={<DocumentPage />} />
+
           <Route path="*" element={<div>Page Not Found</div>} />
         </Route>
 
@@ -68,7 +69,7 @@ const AppRoutes = () => {
           <Route path="*" element={<div>Page Not Found</div>} />
         </Route>
         <Route path="add-project-category" element={<AddProjectCategory />} />
-        <Route path="*" element={<NotFound/>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
