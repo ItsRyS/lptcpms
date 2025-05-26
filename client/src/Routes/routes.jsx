@@ -67,8 +67,9 @@ const AppRoutes = () => {
           <Route path="manage-users" element={<ManageUsers />} />
           <Route path="upload-past-projects" element={<UploadPastProjects />} />
           <Route path="*" element={<div>Page Not Found</div>} />
+          <Route path="add-project-category" element={<AddProjectCategory />} />
         </Route>
-        <Route path="add-project-category" element={<AddProjectCategory />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
