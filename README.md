@@ -11,11 +11,11 @@
 ## Required Secrets
 
 ```bash
-secrets/mysql_user          # nutmachi
-secrets/mysql_pass          # 09200128
-secrets/mysql_root_pass     # rootpass123 (or any value)
-secrets/minio_user          # nutmachi
-secrets/minio_pass          # 09200128
+secrets/mysql_user
+secrets/mysql_pass
+secrets/mysql_root_pass
+secrets/minio_user
+secrets/minio_pass
 ```
 
 **Important**: All files must be **plain text without newline (\n)** or `-n`.
