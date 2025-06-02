@@ -2,6 +2,38 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 const LoginPage = () => {
   const [userType, setUserType] = useState("student");
+  const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+          role: userType,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("userId", data.userId);
+      sessionStorage.setItem("role", data.role);
+
+      if (data.isFirstLogin) {
+        window.location.href = "/auth/force-change";
+      } else {
+        window.location.href = "/";
+      }
+    } catch (err) {
+      alert(err.message || "Login failed");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row bg-white rounded-2xl shadow-2xl overflow-hidden max-w-6xl w-full">
@@ -123,18 +155,23 @@ const LoginPage = () => {
                       : "Enter your Email"
                   }
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                  value={formData.username}
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }
                 />
               </div>
 
               {/* Password Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
-                  Password
-                </label>
                 <input
                   type="password"
                   placeholder="Enter your password"
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
                 />
               </div>
 
@@ -152,6 +189,7 @@ const LoginPage = () => {
               {/* Submit Button */}
               <button
                 type="submit"
+                onClick={handleLogin}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold transition"
               >
                 Sign in

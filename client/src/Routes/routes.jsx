@@ -35,7 +35,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/force-change" element={<ForceChangePage />} />
+        <Route path="/auth/force-change" element={<ForceChangePage />} />
 
         {/* Student Routes */}
         <Route path="/student" element={<LayoutStudent />}>

@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import { db } from "./config/db.js";
 import logger from "./config/logger.js";
-
+import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -60,6 +60,8 @@ app.use(
 app.get("/", (req, res) => {
   res.send("Hello from server");
 });
+//use routes
+app.use("/api/auth", authRoutes);
 
 app.get("/health", async (req, res) => {
   try {
@@ -79,6 +81,9 @@ app.use((err, req, res, next) => {
   logger.error("Unexpected error:", err);
   res.status(500).json({ error: "Internal server error" });
 });
+
+
+
 
 const server = app.listen(port, () => {
   logger.info(`App listening on port ${port}`);

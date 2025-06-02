@@ -12,5 +12,15 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
   }
+input[type="password"]::-ms-reveal {
+  display: none;
+}
 
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
   
