@@ -10,8 +10,8 @@ const ContactForm = () => {
     <section id="contact" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h2>
-          <p className="text-text max-w-3xl mx-auto text-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">Get in Touch</h2>
+          <p className="text-gray-500 max-w-3xl mx-auto text-lg">
             Interested in our programs? Have questions about the IT department?
             Contact us today and take your first step toward a tech career!
           </p>
@@ -28,10 +28,10 @@ const ContactForm = () => {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="bg-gray-500/5 p-2 rounded">
-                    <MapPinIcon className="h-5 w-5 text-orange-600" />
+                    <MapPinIcon className="h-5 w-5 text-orange-500" />
                   </div>
                   <div>
-                    <h4 className="font-semibold  text-left">Address</h4>
+                    <h4 className="font-semibold text-black text-left">Address</h4>
                     <p className="text-gray-500 text-left">
                       Lampang Tech College, 173 Phahonyothin Rd, Lampang, 52000
                     </p>
@@ -40,7 +40,7 @@ const ContactForm = () => {
 
                 <div className="flex items-start gap-4">
                   <div className="bg-gray-500/5 p-2 rounded">
-                    <EnvelopeIcon className="h-5 w-5 text-orange-600" />
+                    <EnvelopeIcon className="h-5 w-5 text-orange-500" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-black text-left">
@@ -57,7 +57,7 @@ const ContactForm = () => {
 
                 <div className="flex items-start gap-4">
                   <div className="bg-gray-500/5 p-2 rounded">
-                    <PhoneIcon className="h-5 w-5 text-orange-600" />
+                    <PhoneIcon className="h-5 w-5 text-orange-500" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-black text-left">

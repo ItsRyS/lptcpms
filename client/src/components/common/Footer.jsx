@@ -22,14 +22,14 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2 text-white/80">
               <li>
-                <a href="#hero" className="hover:text-white transition-all-300">
+                <a href="#hero" className="hover:text-white transition-all">
                   Home
                 </a>
               </li>
               <li>
                 <a
                   href="#about"
-                  className="hover:text-white transition-all-300"
+                  className="hover:text-white transition-all"
                 >
                   About
                 </a>
@@ -37,7 +37,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#staff"
-                  className="hover:text-white transition-all-300"
+                  className="hover:text-white transition-all"
                 >
                   Staff
                 </a>
@@ -45,7 +45,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#programs"
-                  className="hover:text-white transition-all-300"
+                  className="hover:text-white transition-all"
                 >
                   Programs
                 </a>
@@ -53,7 +53,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#contact"
-                  className="hover:text-white transition-all-300"
+                  className="hover:text-white transition-all"
                 >
                   Contact
                 </a>
@@ -73,7 +73,7 @@ const Footer = () => {
               href="https://www.facebook.com/LPTC.IT"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/80 hover:text-orange-500 transition-all-300"
+              className="text-white/80 hover:text-orange-500 transition-all"
             >
               Facebook: สาขาวิชาเทคโนโลยีสารสนเทศ
             </a>

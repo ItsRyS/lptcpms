@@ -12,8 +12,8 @@ const StaffMember = ({ name, role, image }) => {
                     loading="lazy"
                 />
             </div>
-            <h5 className="text-lg font-semibold text-primary mb-2">{name}</h5>
-            <div className="text-text mt-2">
+            <h5 className="text-lg font-semibold text-black mb-2">{name}</h5>
+            <div className="text-gray-500 mt-2">
                 {role.map((r, index) => (
                     <p key={index} className="text-sm">{r}</p>
                 ))}
@@ -64,7 +64,6 @@ const StaffDirectory = () => {
             ],
             image: "https://placehold.co/150"
         },
-        
     ];
 
     const contractTeachers = [
@@ -94,10 +93,10 @@ const StaffDirectory = () => {
     ];
 
     return (
-        <section id="staff" className="py-16 md:py-24 ">
+        <section id="staff" className="py-16 md:py-24 bg-white">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center mb-14">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 ">ผังบุคลากรแผนกวิชาเทคโนโลยีสารสนเทศ</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">ผังบุคลากรแผนกวิชาเทคโนโลยีสารสนเทศ</h2>
                     <div className="h-1 w-24 bg-orange-500 mx-auto"></div>
                 </div>
 

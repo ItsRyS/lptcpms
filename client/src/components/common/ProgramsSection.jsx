@@ -12,7 +12,7 @@ const ProgramsSection = () => {
       title: "Diploma in Information Technology",
       description:
         "A 2-year program focused on software development, networking, and fundamental IT skills for entry-level positions.",
-      icon: <CodeBracketIcon className="h-10 w-10 text-orange-600" />,
+      icon: <CodeBracketIcon className="h-10 w-10 text-orange-500" />,
       highlights: [
         "Software Development",
         "System Administration",
@@ -23,7 +23,7 @@ const ProgramsSection = () => {
       title: "Web Development & Design",
       description:
         "Specialized program covering front-end technologies, back-end development and responsive design principles.",
-      icon: <GlobeAltIcon className="h-10 w-10 text-orange-600" />,
+      icon: <GlobeAltIcon className="h-10 w-10 text-orange-500" />,
       highlights: [
         "UI/UX Design",
         "Front-end Development",
@@ -34,14 +34,14 @@ const ProgramsSection = () => {
       title: "Database Management",
       description:
         "Comprehensive study of database systems, data modeling, SQL and NoSQL databases, and database administration.",
-      icon: <CircleStackIcon className="h-10 w-10 text-orange-600" />,
+      icon: <CircleStackIcon className="h-10 w-10 text-orange-500" />,
       highlights: ["Data Modeling", "SQL/NoSQL", "Database Administration"],
     },
     {
       title: "Network & Cybersecurity",
       description:
         "In-depth program covering network infrastructure, security protocols, and protection against cyber threats.",
-      icon: <ShieldCheckIcon className="h-10 w-10 text-orange-600" />,
+      icon: <ShieldCheckIcon className="h-10 w-10 text-orange-500" />,
       highlights: [
         "Network Configuration",
         "Security Protocols",
@@ -54,7 +54,7 @@ const ProgramsSection = () => {
     <section id="programs" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
             Programs Offered
           </h2>
           <p className="text-gray-500 max-w-3xl mx-auto text-lg">
@@ -62,7 +62,7 @@ const ProgramsSection = () => {
             technology industry with hands-on learning and industry-relevant
             skills.
           </p>
-          <div className="h-1 w-24 bg-orange-500 text-blue-600 mx-auto mt-6"></div>
+          <div className="h-1 w-24 bg-orange-500 mx-auto mt-6"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -75,7 +75,7 @@ const ProgramsSection = () => {
                 <div className="bg-gray-500/5 p-3 rounded-lg">
                   {program.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-orange-500 ">
+                <h3 className="text-xl font-semibold text-orange-500">
                   {program.title}
                 </h3>
               </div>
