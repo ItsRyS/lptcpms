@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-
+import RouteTracker from "@/services/routeTracker";
 // Layouts
 import LayoutStudent from "@/layouts/layoutStudent";
 import LayoutTeacher from "@/layouts/layoutTeacher";
@@ -44,6 +44,7 @@ const RedirectByRole = () => {
 const AppRoutes = () => {
   return (
     <Router>
+      <RouteTracker />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<RedirectByRole />} />
