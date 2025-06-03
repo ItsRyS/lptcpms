@@ -1,4 +1,9 @@
 import winston from "winston";
+import fs from "fs";
+
+if (!fs.existsSync("logs")) {
+  fs.mkdirSync("logs");
+}
 
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || "info",
@@ -7,11 +12,22 @@ const logger = winston.createLogger({
     winston.format.json()
   ),
   transports: [
-    new winston.transports.File({ filename: "logs/error.log", level: "error" }),
-    new winston.transports.File({ filename: "logs/combined.log" }),
+    new winston.transports.File({
+      filename: "logs/error.log",
+      level: "error",
+    }),
+    new winston.transports.File({
+      filename: "logs/combined.log",
+      level: "info",
+    }),
+    new winston.transports.File({
+      filename: "logs/debug.log",
+      level: "debug",
+    }),
   ],
 });
 
+// Show log on console (except debug in production)
 if (process.env.NODE_ENV !== "production") {
   logger.add(
     new winston.transports.Console({

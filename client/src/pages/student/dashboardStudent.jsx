@@ -2,7 +2,7 @@ import React from 'react'
 
 const HomeStudent = () => {
   return (
-    <div>HomeStudent</div>
+    <div className="text-xl font-bold text-blue-900">Welcome, Student</div>
   )
 }
 

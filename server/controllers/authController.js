@@ -7,7 +7,7 @@ dotenv.config();
 export const login = async (req, res) => {
   const { username, password, role } = req.body;
   try {
-    const rows = await db.query(
+    const [rows] = await db.query(
       'SELECT * FROM users WHERE username = ? AND role = ?',
       [username, role]
     );
@@ -61,7 +61,11 @@ export const forceChangePassword = async (req, res) => {
       [password_hash, userId]
     );
 
-    const roleResult = await db.query('SELECT role FROM users WHERE user_id = ?', [userId]);
+    const [roleResult] = await db.query(
+      'SELECT role FROM users WHERE user_id = ?',
+      [userId]
+    );
+
     const role = roleResult[0]?.role;
 
     if (role === 'student') {

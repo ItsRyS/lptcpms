@@ -22,9 +22,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   morgan("combined", {
-    stream: { write: (message) => logger.info(message.trim()) },
+    stream: {
+      write: (message) => {
+        const isHealthcheck = message.includes('GET / ') || message.includes('GET /health');
+        logger.log(isHealthcheck ? 'debug' : 'info', message.trim());
+      },
+    },
   })
 );
+
+
 
 // CORS
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
