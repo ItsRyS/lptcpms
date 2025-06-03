@@ -81,10 +81,7 @@ const ProgramsSection = () => {
       <div className="relative container mx-auto px-4 md:px-6">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-950/5 border border-blue-950/10 rounded-full mb-6">
-            <AcademicCapIcon className="w-5 h-5 text-blue-950" />
-            <span className="text-blue-950 font-medium text-sm">Academic Excellence</span>
-          </div>
+         
           
           <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-6 leading-tight">
             Programs

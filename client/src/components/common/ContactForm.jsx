@@ -39,10 +39,7 @@ const ContactForm = () => {
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-950 to-blue-900 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <EnvelopeIcon className="h-4 w-4 text-orange-500" />
-            Contact Us
-          </div>
+        
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-blue-950 leading-tight">
             Get in <span className="text-orange-500">Touch</span>
           </h2>
