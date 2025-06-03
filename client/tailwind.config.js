@@ -1,42 +1,32 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./client/src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-        fontFamily: {
-            sans: ['Lato', 'sans-serif'], 
-        },
+      fontFamily: {
+        sans: ["Lato", "sans-serif"],
+      },
       colors: {
-        // ขาว
-        white: '#FFFFFF', // ใช้สำหรับพื้นหลังทั่วไปและข้อความ
-        // ดำ
-        black: '#000000', // ใช้สำหรับข้อความทั่วไป
-        // เทา
+        white: "#FFFFFF",
+        black: "#000000",
         gray: {
-          50: '#F9FAFB', // เทาอ่อนสำหรับพื้นหลัง
-          100: '#F3F4F6', // เทาอ่อนสำหรับรายละเอียดรอง
-          500: '#6B7280', // เทากลางสำหรับรายละเอียดรอง
+          50: "#F9FAFB",
+          100: "#F3F4F6",
+          500: "#6B7280",
         },
-        // ส้ม
         orange: {
-          500: '#F97316', // สีเน้นหลักสำหรับปุ่ม CTA
-          600: '#EA580C', // สีส้มเข้มขึ้นสำหรับสถานะ hover
+          500: "#F97316",
+          600: "#EA580C",
         },
-        // น้ำเงิน
         blue: {
-          500: '#3B82F6', // น้ำเงินสำหรับส่วนหัวและส่วนต่าง ๆ
-          600: '#2563EB', // น้ำเงินเข้มขึ้นเล็กน้อย
-          900: '#1E3A8A', // น้ำเงินเข้มสำหรับพื้นหลัง
-          950: '#172554', // น้ำเงินเข้มมากสำหรับส่วนหัวและฟุตเตอร์
+          500: "#3B82F6",
+          600: "#2563EB",
+          900: "#1E3A8A",
+          950: "#172554",
         },
       },
       backgroundImage: {
-        // การไล่สีสำหรับ Hero และ Footer
-        'gradient-blue': 'linear-gradient(to right, #172554, #1E3A8A)',
+        "gradient-blue": "linear-gradient(to right, #172554, #1E3A8A)",
       },
     },
   },
