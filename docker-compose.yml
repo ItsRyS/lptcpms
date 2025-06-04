@@ -1,0 +1,106 @@
+version: "3.8"
+services:
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=lptcitms
+      - DB_USER=nutmachi
+      - DB_PASS=09200128
+    volumes:
+      - ./server:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+    networks:
+      - lptc_network
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: lptcitms
+      MYSQL_USER_FILE: /run/secrets/mysql_user
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_pass
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_pass
+      LANG: C.UTF-8
+      MYSQL_INITDB_SKIP_TZINFO: 1
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    secrets:
+      - mysql_user
+      - mysql_pass
+      - mysql_root_pass
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - lptc_network
+    ports:
+      - "3306:3306"
+
+  minio:
+    image: quay.io/minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER_FILE: /run/secrets/minio_user
+      MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_pass
+    secrets:
+      - minio_user
+      - minio_pass
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9001/minio/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - lptc_network
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - lptc_network
+
+volumes:
+  mysql_data:
+  minio_data:
+
+secrets:
+  mysql_user:
+    file: ./secrets/mysql_user
+  mysql_pass:
+    file: ./secrets/mysql_pass
+  mysql_root_pass:
+    file: ./secrets/mysql_root_pass
+  minio_user:
+    file: ./secrets/minio_user
+  minio_pass:
+    file: ./secrets/minio_pass
+
+networks:
+  lptc_network:

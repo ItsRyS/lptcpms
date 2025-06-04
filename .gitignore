@@ -1,29 +1,42 @@
-# Node
-node_modules/
-dist/
-build/
-
-# Env
-.env
-
-# Logs
+# General ignore for logs, build artifacts, and environment files
+logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+docker-compose-*.log
 
-# Docker
-mysql_data/
-docker-compose.yml
-docker-compose.override.yml
-docker-compose.override.yaml
+node_modules/
+dist/
+dist-ssr/
+build/
+*.local
+.env
+
+# Docker related files
+
+.dockerignore
 docker-compose.override.yml
 docker-compose.override.yaml
 init.sql
-# Linux
-*~
-# IDEs
-.idea/
-.vscode/
 
+# Database and Storage volumes
+mysql_data/
 mysql_*
 minio_*
 
+# Editor and IDE specific files
+.vscode/
+!.vscode/extensions.json  # Keep extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating System specific files
+*~
