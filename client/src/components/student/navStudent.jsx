@@ -21,7 +21,7 @@ const NavStudent = () => {
 
   const menuItems = [
     {
-      path: "/student/dashboard",
+      path: "/student",
       label: "Dashboard",
       icon: <HomeIcon className="w-5 h-5" />,
     },
@@ -117,6 +117,7 @@ const NavStudent = () => {
             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
             ออกจากระบบ
           </button>
+          
         </div>
       </aside>
     </>

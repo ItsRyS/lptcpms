@@ -1,9 +1,6 @@
-import React from 'react'
+const DashboardStudent = () => {
+  console.log("✅ DashboardStudent loaded");
+  return <div className="text-xl font-bold text-blue-900">ยินดีต้อนรับนักศึกษา</div>
+};
 
-const HomeStudent = () => {
-  return (
-    <div className="text-xl font-bold text-blue-900">Welcome, Student</div>
-  )
-}
-
-export default HomeStudent
+export default DashboardStudent;

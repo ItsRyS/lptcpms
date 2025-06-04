@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [userType, setUserType] = useState("student");
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,16 +25,18 @@ const LoginPage = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("role", data.role);
+      sessionStorage.setItem("userId", data.userId);
+
       if (data.isFirstLogin) {
-        window.location.href = "/auth/force-change";
+        navigate("/auth/force-change");
+      } else if (data.role === "student") {
+        navigate("/student");
+      } else if (data.role === "teacher") {
+        navigate("/teacher");
       } else {
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("role", data.role);
-        if (data.role === "student") {
-          window.location.href = "/student";
-        } else if (data.role === "teacher") {
-          window.location.href = "/teacher";
-        }
+        navigate("/"); 
       }
     } catch (err) {
       alert(err.message || "Login failed");
@@ -40,7 +44,6 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
@@ -251,9 +254,7 @@ const LoginPage = () => {
 
               {/* Back to home */}
               <div className="mt-8 text-center">
-                <p className="text-gray-500 text-sm mb-4">
-                  อยากกลับไปหน้าแรกหรอ?
-                </p>
+                <p className="text-gray-500 text-sm mb-4">อยากกลับไปหน้าแรก</p>
                 <button
                   type="button"
                   onClick={() => (window.location.href = "/")}

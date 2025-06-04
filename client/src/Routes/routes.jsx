@@ -5,6 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import RouteTracker from "@/services/routeTracker";
+
 // Layouts
 import LayoutStudent from "@/layouts/layoutStudent";
 import LayoutTeacher from "@/layouts/layoutTeacher";
@@ -13,9 +14,13 @@ import LayoutTeacher from "@/layouts/layoutTeacher";
 import LandingPage from "@/pages/landingPage";
 import LoginPage from "@/pages/auth/loginPage";
 import ForceChangePage from "@/pages/auth/forceChangePage";
+import NotFound from "@/components/common/NotFound";
+
+// Protected Wrapper
+import ProtectedRoute from "@/services/ProtectedRoute";
 
 // Student Pages
-import HomeStudent from "@/pages/student/dashboardStudent";
+import DashboardStudent from "@/pages/student/DashboardStudent";
 import ProfilePage from "@/pages/student/profilePage";
 import OldProject from "@/pages/student/oldProject";
 import RequestProject from "@/pages/student/requestProject";
@@ -24,7 +29,7 @@ import TeacherInfo from "@/pages/student/teacherInfo";
 import DocumentPage from "@/pages/student/documentPage";
 
 // Teacher Pages
-import HomeTeacher from "@/pages/teacher/DashboardTeacher";
+import DashboardTeacher from "@/pages/teacher/DashboardTeacher";
 import ApproveProjectRequests from "@/pages/teacher/ApproveProjectRequests";
 import ReviewProjectDocuments from "@/pages/teacher/ReviewProjectDocuments";
 import ApproveCompletedProjects from "@/pages/teacher/ApproveCompletedProjects";
@@ -33,7 +38,6 @@ import UploadSampleDocuments from "@/pages/teacher/UploadSampleDocuments";
 import ManageUsers from "@/pages/teacher/ManageUsers";
 import UploadPastProjects from "@/pages/teacher/UploadPastProjects";
 import AddProjectCategory from "@/pages/teacher/AddProjectCategory";
-import NotFound from "@/components/common/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -46,8 +50,17 @@ const AppRoutes = () => {
         <Route path="/auth/force-change" element={<ForceChangePage />} />
 
         {/* Student Routes */}
-        <Route path="/student" element={<LayoutStudent />}>
-          <Route path="dashboard" element={<HomeStudent />} />
+        <Route
+          path="/student"
+          element={
+            <ProtectedRoute allowedRole="student">
+              {console.log("✅ Rendering LayoutStudent for /student")}
+              <LayoutStudent />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardStudent />} />
+          {/*<Route path="dashboard" element={<DashboardStudent />} />*/}
           <Route path="profile" element={<ProfilePage />} />
           <Route path="old-project" element={<OldProject />} />
           <Route path="request-project" element={<RequestProject />} />
@@ -58,8 +71,15 @@ const AppRoutes = () => {
         </Route>
 
         {/* Teacher Routes */}
-        <Route path="/teacher" element={<LayoutTeacher />}>
-          <Route index element={<HomeTeacher />} />
+        <Route
+          path="/teacher"
+          element={
+            <ProtectedRoute allowedRole="teacher">
+              <LayoutTeacher />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardTeacher />} />
           <Route path="approve-requests" element={<ApproveProjectRequests />} />
           <Route path="review-documents" element={<ReviewProjectDocuments />} />
           <Route
@@ -77,7 +97,7 @@ const AppRoutes = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
 
-        {/* Global Fallback */}
+        {/* Fallback Route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

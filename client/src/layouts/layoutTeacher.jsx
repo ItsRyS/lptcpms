@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavTeacher from "@/components/teacher/navTeacher";
+import NavTeacher from "@/components/teacher/NavTeacher";
 
 const LayoutTeacher = () => {
   return (

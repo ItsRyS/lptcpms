@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavStudent from "@/components/student/navStudent";
+import NavStudent from "@/components/student/NavStudent";
 
 const LayoutStudent = () => {
   return (
