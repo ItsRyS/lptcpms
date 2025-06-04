@@ -48,8 +48,7 @@ export const db = {
   pool,
   query: async (sql, params) => {
     try {
-      const [results] = await pool.query(sql, params);
-      return results;
+      return await pool.query(sql, params); // [rows, fields]
     } catch (err) {
       logger.error(`Database query error: ${err.message}`);
       throw err;

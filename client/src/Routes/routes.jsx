@@ -10,6 +10,7 @@ import LayoutStudent from "@/layouts/layoutStudent";
 import LayoutTeacher from "@/layouts/layoutTeacher";
 
 // Pages
+import LandingPage from "@/pages/landingPage";
 import LoginPage from "@/pages/auth/loginPage";
 import ForceChangePage from "@/pages/auth/forceChangePage";
 
@@ -34,20 +35,13 @@ import UploadPastProjects from "@/pages/teacher/UploadPastProjects";
 import AddProjectCategory from "@/pages/teacher/AddProjectCategory";
 import NotFound from "@/components/common/NotFound";
 
-const RedirectByRole = () => {
-  const role = sessionStorage.getItem("role");
-  if (role === "student") return <Navigate to="/student/dashboard" replace />;
-  if (role === "teacher") return <Navigate to="/teacher" replace />;
-  return <Navigate to="/login" replace />;
-};
-
 const AppRoutes = () => {
   return (
     <Router>
       <RouteTracker />
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<RedirectByRole />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/force-change" element={<ForceChangePage />} />
 
