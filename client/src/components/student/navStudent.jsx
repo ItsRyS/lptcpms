@@ -9,7 +9,7 @@ import {
   ArchiveBoxIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import { logout } from "@/utils/logout";
+import { logout } from "@/utils/Logout";
 
 const NavStudent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

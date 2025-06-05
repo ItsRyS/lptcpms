@@ -12,7 +12,7 @@ import {
   ArchiveBoxArrowDownIcon,
   TagIcon,
 } from "@heroicons/react/24/outline";
-import { logout } from "@/utils/logout";
+import { logout } from "@/utils/Logout";
 
 const NavTeacher = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

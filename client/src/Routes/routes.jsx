@@ -4,16 +4,16 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import RouteTracker from "@/services/routeTracker";
+import RouteTracker from "@/services/RouteTracker";
 
 // Layouts
-import LayoutStudent from "@/layouts/layoutStudent";
-import LayoutTeacher from "@/layouts/layoutTeacher";
+import LayoutStudent from "@/layouts/LayoutStudent";
+import LayoutTeacher from "@/layouts/LayoutTeacher";
 
 // Pages
-import LandingPage from "@/pages/landingPage";
-import LoginPage from "@/pages/auth/loginPage";
-import ForceChangePage from "@/pages/auth/forceChangePage";
+import LandingPage from "@/pages/LandingPage";
+import LoginPage from "@/pages/auth/LoginPage";
+import ForceChangePage from "@/pages/auth/ForceChangePage";
 import NotFound from "@/components/common/NotFound";
 
 // Protected Wrapper
@@ -21,12 +21,12 @@ import ProtectedRoute from "@/services/ProtectedRoute";
 
 // Student Pages
 import DashboardStudent from "@/pages/student/DashboardStudent";
-import ProfilePage from "@/pages/student/profilePage";
-import OldProject from "@/pages/student/oldProject";
-import RequestProject from "@/pages/student/requestProject";
-import SentDoc from "@/pages/student/sentDoc";
-import TeacherInfo from "@/pages/student/teacherInfo";
-import DocumentPage from "@/pages/student/documentPage";
+import ProfilePage from "@/pages/student/ProfilePage";
+import OldProject from "@/pages/student/OldProject";
+import RequestProject from "@/pages/student/RequestProject";
+import SentDoc from "@/pages/student/SentDoc";
+import TeacherInfo from "@/pages/student/TeacherInfo";
+import DocumentPage from "@/pages/student/DocumentPage";
 
 // Teacher Pages
 import DashboardTeacher from "@/pages/teacher/DashboardTeacher";
