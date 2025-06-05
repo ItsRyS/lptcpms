@@ -72,7 +72,7 @@ const NavStudent = () => {
       {isSidebarOpen && (
         <div
           onClick={handleCloseSidebar}
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
+          className="fixed inset-0 bg-black opacity-45 z-40 sm:hidden"
         />
       )}
 
