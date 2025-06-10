@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { showSuccess, showError } from "@/utils/Alert";
 
 const LoginPage = () => {
   const [userType, setUserType] = useState("student");
@@ -21,7 +22,43 @@ const LoginPage = () => {
           role: userType,
         }),
       });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      
 
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("role", data.role);
+      sessionStorage.setItem("userId", data.userId);
+
+      if (data.isFirstLogin) {
+        navigate("/auth/force-change");
+      } else if (data.role === "student") {
+        navigate("/student");
+      } else if (data.role === "teacher") {
+        navigate("/teacher");
+      } else {
+        navigate("/");
+      }
+    } catch (err) {
+      showError(err.message || "เข้าสู่ระบบล้มเหลว");
+    } finally {
+      setIsLoading(false);
+      showSuccess("เข้าสู่ระบบสำเร็จ");
+    }
+  };
+
+  const devLogin = async (username, password, role) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          password,
+          role,
+        }),
+      });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
@@ -36,12 +73,13 @@ const LoginPage = () => {
       } else if (data.role === "teacher") {
         navigate("/teacher");
       } else {
-        navigate("/"); 
+        navigate("/");
       }
     } catch (err) {
-      alert(err.message || "Login failed");
+      showError(err.message || "เข้าสู่ระบบล้มเหลว");
     } finally {
       setIsLoading(false);
+      showSuccess("เข้าสู่ระบบสำเร็จ");
     }
   };
   return (
@@ -251,6 +289,22 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
+              {/* Dev Mode Login Button */}
+              <button
+                onClick={() => devLogin("65010001", "123456", "student")}
+                className="px-4 py-2 text-sm rounded bg-orange-100 hover:bg-orange-200 text-orange-700 font-medium border border-orange-300"
+              >
+                Login as Student
+              </button>
+
+              <button
+                onClick={() =>
+                  devLogin("teachermock@example.com", "123456", "teacher")
+                }
+                className="px-4 py-2 text-sm rounded bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium border border-blue-300"
+              >
+                Login as Teacher
+              </button>
 
               {/* Back to home */}
               <div className="mt-8 text-center">

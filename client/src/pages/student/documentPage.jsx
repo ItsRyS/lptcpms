@@ -1,12 +1,4 @@
-const getCategoryColor = (category) => {
-    const colors = {
-      "โครงงาน": "bg-blue-100 text-blue-800",
-      "บทที่ 1": "bg-green-100 text-green-800",
-      "ฟอร์ม": "bg-purple-100 text-purple-800",
-      "บรรณานุกรม": "bg-orange-100 text-orange-800",
-    };
-    return colors[category] || "bg-gray-100 text-gray-800";
-  };import React, { useState } from "react";
+import React, { useState } from "react";
 import {
   DocumentTextIcon,
   EyeIcon,
@@ -14,7 +6,15 @@ import {
   MagnifyingGlassIcon,
   FunnelIcon,
 } from "@heroicons/react/24/outline";
-
+const getCategoryColor = (category) => {
+  const colors = {
+    โครงงาน: "bg-blue-100 text-blue-800",
+    "บทที่ 1": "bg-green-100 text-green-800",
+    ฟอร์ม: "bg-purple-100 text-purple-800",
+    บรรณานุกรม: "bg-orange-100 text-orange-800",
+  };
+  return colors[category] || "bg-gray-100 text-gray-800";
+};
 const sampleDocuments = [
   {
     id: 1,
@@ -24,7 +24,7 @@ const sampleDocuments = [
     fileUrl: "/sample/cs101-cover.pdf",
     fileSize: "2.3 MB",
     uploadDate: "2024-01-15",
-    description: "เทมเพลตสำหรับการจัดทำหน้าปกโครงงานตามมาตรฐานของคณะ"
+    description: "เทมเพลตสำหรับการจัดทำหน้าปกโครงงานตามมาตรฐานของคณะ",
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const sampleDocuments = [
     fileUrl: "/sample/cs201-ch1-guide.docx",
     fileSize: "1.8 MB",
     uploadDate: "2024-01-20",
-    description: "คู่มือการเขียนบทที่ 1 ของโครงงาน รวมถึงรูปแบบและตัวอย่าง"
+    description: "คู่มือการเขียนบทที่ 1 ของโครงงาน รวมถึงรูปแบบและตัวอย่าง",
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const sampleDocuments = [
     fileUrl: "/sample/cs301-request-form.pdf",
     fileSize: "856 KB",
     uploadDate: "2024-01-25",
-    description: "แบบฟอร์มสำหรับการขออนุมัติหัวข้อโครงงานและที่ปรึกษา"
+    description: "แบบฟอร์มสำหรับการขออนุมัติหัวข้อโครงงานและที่ปรึกษา",
   },
   {
     id: 4,
@@ -54,7 +54,7 @@ const sampleDocuments = [
     fileUrl: "/sample/cs102-bibliography.pdf",
     fileSize: "1.2 MB",
     uploadDate: "2024-02-01",
-    description: "ตัวอย่างการเขียนบรรณานุกรมตามรูปแบบ APA และ IEEE"
+    description: "ตัวอย่างการเขียนบรรณานุกรมตามรูปแบบ APA และ IEEE",
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ const sampleDocuments = [
     fileUrl: "/sample/project-evaluation.xlsx",
     fileSize: "245 KB",
     uploadDate: "2024-02-05",
-    description: "แบบประเมินสำหรับการให้คะแนนโครงงานของนักศึกษา"
+    description: "แบบประเมินสำหรับการให้คะแนนโครงงานของนักศึกษา",
   },
   {
     id: 6,
@@ -74,7 +74,7 @@ const sampleDocuments = [
     fileUrl: "/sample/presentation-template.pptx",
     fileSize: "3.2 MB",
     uploadDate: "2024-02-10",
-    description: "เทมเพลต PowerPoint สำหรับการนำเสนอโครงงาน"
+    description: "เทมเพลต PowerPoint สำหรับการนำเสนอโครงงาน",
   },
 ];
 
@@ -86,14 +86,14 @@ export default function DocumentPage() {
 
   const filteredDocs = sampleDocuments.filter((doc) => {
     const term = searchTerm.toLowerCase();
-    const matchesSearch = 
+    const matchesSearch =
       doc.title.toLowerCase().includes(term) ||
       doc.category.toLowerCase().includes(term) ||
       doc.fileType.toLowerCase().includes(term);
-    
-    const matchesCategory = 
+
+    const matchesCategory =
       selectedCategory === "ทั้งหมด" || doc.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -110,21 +110,17 @@ export default function DocumentPage() {
 
   const getFileTypeColor = (fileType) => {
     const colors = {
-      "pdf": "bg-red-100 text-red-800",
-      "docx": "bg-blue-100 text-blue-800", 
-      "xlsx": "bg-green-100 text-green-800",
-      "pptx": "bg-orange-100 text-orange-800",
+      pdf: "bg-red-100 text-red-800",
+      docx: "bg-blue-100 text-blue-800",
+      xlsx: "bg-green-100 text-green-800",
+      pptx: "bg-orange-100 text-orange-800",
     };
     return colors[fileType.toLowerCase()] || "bg-gray-100 text-gray-800";
   };
 
-
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <div className="max-w-7xl mx-auto p-6">
-      
-
         {/* Search and Filter Bar */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8">
           <div className="flex flex-col lg:flex-row gap-4 items-center">
@@ -165,9 +161,7 @@ export default function DocumentPage() {
             <h3 className="text-xl font-semibold text-gray-600 mb-2">
               ไม่พบเอกสารที่ค้นหา
             </h3>
-            <p className="text-gray-500">
-              ลองเปลี่ยนคำค้นหาหรือหมวดหมู่เอกสาร
-            </p>
+            <p className="text-gray-500">ลองเปลี่ยนคำค้นหาหรือหมวดหมู่เอกสาร</p>
           </div>
         ) : (
           // List View
@@ -176,11 +170,21 @@ export default function DocumentPage() {
               <table className="min-w-full">
                 <thead className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
                   <tr>
-                    <th className="py-4 px-6 text-left font-semibold text-gray-700">เอกสาร</th>
-                    <th className="py-4 px-6 text-left font-semibold text-gray-700">ประเภท</th>
-                    <th className="py-4 px-6 text-left font-semibold text-gray-700">ไฟล์</th>
-                    <th className="py-4 px-6 text-left font-semibold text-gray-700">ขนาดไฟล์</th>
-                    <th className="py-4 px-6 text-center font-semibold text-gray-700">ตัวเลือก</th>
+                    <th className="py-4 px-6 text-left font-semibold text-gray-700">
+                      เอกสาร
+                    </th>
+                    <th className="py-4 px-6 text-left font-semibold text-gray-700">
+                      ประเภท
+                    </th>
+                    <th className="py-4 px-6 text-left font-semibold text-gray-700">
+                      ไฟล์
+                    </th>
+                    <th className="py-4 px-6 text-left font-semibold text-gray-700">
+                      ขนาดไฟล์
+                    </th>
+                    <th className="py-4 px-6 text-center font-semibold text-gray-700">
+                      ตัวเลือก
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -195,18 +199,30 @@ export default function DocumentPage() {
                             <DocumentTextIcon className="h-5 w-5 text-blue-600" />
                           </div>
                           <div>
-                            <div className="font-medium text-gray-900">{doc.title}</div>
-                            <div className="text-sm text-gray-500 line-clamp-1">{doc.description}</div>
+                            <div className="font-medium text-gray-900">
+                              {doc.title}
+                            </div>
+                            <div className="text-sm text-gray-500 line-clamp-1">
+                              {doc.description}
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td className="py-4 px-6">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(doc.category)}`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(
+                            doc.category
+                          )}`}
+                        >
                           {doc.category}
                         </span>
                       </td>
                       <td className="py-4 px-6">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getFileTypeColor(doc.fileType)}`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${getFileTypeColor(
+                            doc.fileType
+                          )}`}
+                        >
                           {doc.fileType.toUpperCase()}
                         </span>
                       </td>
@@ -223,7 +239,9 @@ export default function DocumentPage() {
                             ดูตัวอย่าง
                           </button>
                           <button
-                            onClick={() => handleDownload(doc.fileUrl, doc.title)}
+                            onClick={() =>
+                              handleDownload(doc.fileUrl, doc.title)
+                            }
                             className="flex items-center gap-1 px-3 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors shadow-sm hover:shadow"
                           >
                             <ArrowDownTrayIcon className="h-4 w-4" />
@@ -238,8 +256,6 @@ export default function DocumentPage() {
             </div>
           </div>
         )}
-
-        
       </div>
     </div>
   );
