@@ -9,7 +9,7 @@ import {
   ArchiveBoxIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import { logout } from "@/utils/logout";
+import { logout } from "@/utils/Logout";
 
 const NavStudent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -21,7 +21,7 @@ const NavStudent = () => {
 
   const menuItems = [
     {
-      path: "/student/dashboard",
+      path: "/student",
       label: "Dashboard",
       icon: <HomeIcon className="w-5 h-5" />,
     },
@@ -72,7 +72,7 @@ const NavStudent = () => {
       {isSidebarOpen && (
         <div
           onClick={handleCloseSidebar}
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
+          className="fixed inset-0 bg-black opacity-45 z-40 sm:hidden"
         />
       )}
 
@@ -117,6 +117,7 @@ const NavStudent = () => {
             <ArrowLeftOnRectangleIcon className="h-5 w-5" />
             ออกจากระบบ
           </button>
+          
         </div>
       </aside>
     </>

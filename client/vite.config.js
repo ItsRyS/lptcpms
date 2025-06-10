@@ -15,7 +15,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": "http://localhost:3000",
+      "/api": {
+      target: "http://lptcitms-server-1:3000", // container backend
+      changeOrigin: true,
+      secure: false,
+    },
     },
     watch: {
       usePolling: true,

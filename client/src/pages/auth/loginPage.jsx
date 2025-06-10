@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { showSuccess, showError } from "@/utils/Alert";
 
 const LoginPage = () => {
   const [userType, setUserType] = useState("student");
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,28 +22,66 @@ const LoginPage = () => {
           role: userType,
         }),
       });
-
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
+      
+
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("role", data.role);
+      sessionStorage.setItem("userId", data.userId);
 
       if (data.isFirstLogin) {
-        window.location.href = "/auth/force-change";
+        navigate("/auth/force-change");
+      } else if (data.role === "student") {
+        navigate("/student");
+      } else if (data.role === "teacher") {
+        navigate("/teacher");
       } else {
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("role", data.role);
-        if (data.role === "student") {
-          window.location.href = "/student";
-        } else if (data.role === "teacher") {
-          window.location.href = "/teacher";
-        }
+        navigate("/");
       }
     } catch (err) {
-      alert(err.message || "Login failed");
+      showError(err.message || "เข้าสู่ระบบล้มเหลว");
     } finally {
       setIsLoading(false);
+      showSuccess("เข้าสู่ระบบสำเร็จ");
     }
   };
 
+  const devLogin = async (username, password, role) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          password,
+          role,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("role", data.role);
+      sessionStorage.setItem("userId", data.userId);
+
+      if (data.isFirstLogin) {
+        navigate("/auth/force-change");
+      } else if (data.role === "student") {
+        navigate("/student");
+      } else if (data.role === "teacher") {
+        navigate("/teacher");
+      } else {
+        navigate("/");
+      }
+    } catch (err) {
+      showError(err.message || "เข้าสู่ระบบล้มเหลว");
+    } finally {
+      setIsLoading(false);
+      showSuccess("เข้าสู่ระบบสำเร็จ");
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
@@ -248,12 +289,26 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
+              {/* Dev Mode Login Button */}
+              <button
+                onClick={() => devLogin("65010001", "123456", "student")}
+                className="px-4 py-2 text-sm rounded bg-orange-100 hover:bg-orange-200 text-orange-700 font-medium border border-orange-300"
+              >
+                Login as Student
+              </button>
+
+              <button
+                onClick={() =>
+                  devLogin("teachermock@example.com", "123456", "teacher")
+                }
+                className="px-4 py-2 text-sm rounded bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium border border-blue-300"
+              >
+                Login as Teacher
+              </button>
 
               {/* Back to home */}
               <div className="mt-8 text-center">
-                <p className="text-gray-500 text-sm mb-4">
-                  อยากกลับไปหน้าแรกหรอ?
-                </p>
+                <p className="text-gray-500 text-sm mb-4">อยากกลับไปหน้าแรก</p>
                 <button
                   type="button"
                   onClick={() => (window.location.href = "/")}

@@ -7,6 +7,7 @@ const RouteTracker = () => {
   useEffect(() => {
     if (!location.pathname.startsWith("/404")) {
       sessionStorage.setItem("lastValidPath", location.pathname);
+      console.log(" Tracking:", location.pathname); 
     }
   }, [location.pathname]);
 
