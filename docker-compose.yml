@@ -21,6 +21,7 @@ services:
       - DB_PASS=09200128
     volumes:
       - ./server:/app
+      
     depends_on:
       db:
         condition: service_healthy

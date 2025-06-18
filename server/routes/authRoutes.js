@@ -1,12 +1,10 @@
 import express from 'express';
-import {
-  login,
-  forceChangePassword,
-} from '../controllers/authController.js';
+import { login, forceChangePassword } from '../controllers/authController.js';
+import verifyToken from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
 router.post('/login', login);
-router.post('/force-change', forceChangePassword);
+router.put('/force-change-password', verifyToken, forceChangePassword);
 
 export default router;
