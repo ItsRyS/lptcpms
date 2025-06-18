@@ -5,19 +5,39 @@ import logger from "../config/logger.js";
 import {
   getStudentProfile,
   updateStudentProfile,
-} from "../controllers/studentProfileController.js";
+} from "../controllers/studentController.js";
 
 const router = express.Router();
 
 const checkUserId = (req, res, next) => {
-  if (req.params.id !== req.user.userId) {
-    logger.warn(`User ${req.user.userId} attempted to access profile ${req.params.id}`);
-    return res.status(403).json({ message: 'Access denied' });
+  if (!req.user || !req.user.userId) {
+    logger.error(
+      `User not authenticated in checkUserId for request: ${req.method} ${req.url}`
+    );
+    return res.status(401).json({ message: "User not authenticated" });
+  }
+  if (parseInt(req.params.id) !== req.user.userId) {
+    logger.warn(
+      `User ${req.user.userId} attempted to access profile ${req.params.id}`
+    );
+    return res.status(403).json({ message: "Access denied" });
   }
   next();
 };
 
-router.get("/profile/:id", verifyToken, authorizeRole("student"), checkUserId, getStudentProfile);
-router.put("/profile/:id", verifyToken, authorizeRole("student"), checkUserId, updateStudentProfile);
+router.get(
+  "/profile/:id",
+  verifyToken,
+  authorizeRole("student"),
+  checkUserId,
+  getStudentProfile
+);
+router.put(
+  "/profile/:id",
+  verifyToken,
+  authorizeRole("student"),
+  checkUserId,
+  updateStudentProfile
+);
 
 export default router;

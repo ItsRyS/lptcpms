@@ -1,34 +1,17 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import logger from '../config/logger.js';
-dotenv.config();
 
-const verifyToken = (req, res, next) => {
-  if (!process.env.JWT_SECRET) {
-    logger.error('JWT_SECRET is not defined');
-    return res.status(500).json({ message: 'Server configuration error' });
-  }
-
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (!token) {
-    logger.warn(`Token missing for request: ${req.method} ${req.url}`);
-    return res.status(401).json({ message: 'Token required' });
-  }
-
-  logger.info(`Verifying token for request: ${req.method} ${req.url}`);
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      if (err.name === 'TokenExpiredError') {
-        logger.warn(`Token expired for request: ${req.method} ${req.url}`);
-        return res.status(401).json({ message: 'Token expired' });
-      }
-      logger.error(`Invalid token for request: ${req.method} ${req.url}: ${err.message}`);
-      return res.status(403).json({ message: 'Invalid token' });
+const authorizeRole = (role) => {
+  return (req, res, next) => {
+    if (!req.user || !req.user.role) {
+      logger.error(`User not authenticated in authorizeRole for request: ${req.method} ${req.url}`);
+      return res.status(401).json({ message: 'User not authenticated' });
     }
-    req.user = user;
+    if (req.user.role !== role) {
+      logger.warn(`Access denied for user: ${req.user.username} with role: ${req.user.role} (required: ${role})`);
+      return res.status(403).json({ message: 'Access denied' });
+    }
     next();
-  });
+  };
 };
 
-export default verifyToken;
+export default authorizeRole;

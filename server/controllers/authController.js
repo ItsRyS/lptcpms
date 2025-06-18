@@ -7,9 +7,12 @@ dotenv.config();
 
 export const login = async (req, res) => {
   const { username, password, role } = req.body;
+  console.log("Login payload:", username, password, role);
   if (!username || !password || !role) {
     logger.warn("Missing required fields in login payload");
-    return res.status(400).json({ message: "กรุณากรอก username, password และ role" });
+    return res
+      .status(400)
+      .json({ message: "กรุณากรอก username, password และ role" });
   }
 
   try {
@@ -23,16 +26,20 @@ export const login = async (req, res) => {
       "SELECT * FROM users WHERE username = ? AND role = ?",
       [username, role]
     );
-
+    console.log("Query Result:", rows);
     if (!rows || rows.length === 0) {
       logger.warn(`Login failed: user not found - ${username} (${role})`);
       return res.status(401).json({ message: "User not found" });
     }
 
     const user = rows[0];
+    console.log("Client password:", password);
+    console.log("Hashed from DB:", user.password_hash);
     const isValid = await argon2.verify(user.password_hash, password);
+    console.log("isValid:", isValid);
     if (!isValid) {
       logger.warn(`Invalid password for user: ${username}`);
+      console.warn(`Invalid password for user: ${username}`);
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
@@ -61,7 +68,9 @@ export const forceChangePassword = async (req, res) => {
     return res.status(400).json({ message: "กรุณากรอกข้อมูลให้ครบถ้วน" });
   }
   if (newPassword.length < 8) {
-    return res.status(400).json({ message: "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร" });
+    return res
+      .status(400)
+      .json({ message: "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร" });
   }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
