@@ -22,20 +22,21 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   connectTimeout: 10000,
+  idleTimeoutMillis: 30000,
 });
 
 async function connectWithRetry(maxRetries = 5, delayMs = 5000) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const conn = await pool.getConnection();
-      logger.info("Connected to MySQL database successfully.");
+      logger.info(`Connected to MySQL database: ${process.env.DB_NAME} on ${process.env.DB_HOST}:${process.env.DB_PORT}`);
       conn.release();
       return;
     } catch (err) {
       logger.error(`Attempt ${attempt} failed to connect to MySQL: ${err.message}`);
       if (attempt === maxRetries) {
-        logger.error("Max retries reached. Database unavailable.");
-        return;
+        logger.error("Max retries reached. Database unavailable. Exiting...");
+        process.exit(1);
       }
       await new Promise((resolve) => setTimeout(resolve, delayMs));
     }
@@ -48,7 +49,7 @@ export const db = {
   pool,
   query: async (sql, params) => {
     try {
-      return await pool.query(sql, params); // [rows, fields]
+      return await pool.query(sql, params);
     } catch (err) {
       logger.error(`Database query error: ${err.message}`);
       throw err;
