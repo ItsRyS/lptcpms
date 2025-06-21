@@ -14,7 +14,6 @@ if (-not (Get-Process -Name "Postman" -ErrorAction SilentlyContinue)) {
 }
 Write-Host "[OK] Postman is ready!"
 
-
 if (-not (Get-Process -Name "Code" -ErrorAction SilentlyContinue)) {
     Write-Host "[...] Launching VS Code..."
     Start-Process "$env:LOCALAPPDATA\Programs\Microsoft VS Code\Code.exe" -WorkingDirectory "D:\SoftApp\lptcitms"
@@ -57,7 +56,11 @@ while (-not $ready) {
 }
 Write-Host "[OK] Frontend is ready at http://localhost:5173/"
 Start-Process "http://localhost:5173/"
-
+if (-not (Get-Process -Name "DBeaver" -ErrorAction SilentlyContinue)) {
+    Write-Host "[...] Starting DBeaver..."
+    Start-Process "D:\Dbeaver\dbeaver.exe"
+}
+Write-Host "[OK] DBeaver is ready!"
 Write-Host "[OK] Development environment is ready!"
 for ($i = 3; $i -ge 1; $i--) {
     Write-Host -NoNewline "`rThis window will close in $i second(s)..."

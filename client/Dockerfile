@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:20 AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -12,7 +12,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Stage 3: Dev (ใช้ Vite)
-FROM node:20 AS dev
+FROM node:22-alpine AS dev
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
